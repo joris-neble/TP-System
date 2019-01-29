@@ -73,7 +73,7 @@ void nsFctShell::FileCopy (const char * const Destination,
     for (; nsSysteme::Write (fdDest, Tampon, nsSysteme::Read (fdSource, Tampon, NbBytes)); );
 
     nsSysteme::Close (fdSource);
-    nsSysteme::Close (fdDest);sigemptyset (& Action.sa_mask);
+    nsSysteme::Close (fdDest);
 
 } // FileCopy()
 

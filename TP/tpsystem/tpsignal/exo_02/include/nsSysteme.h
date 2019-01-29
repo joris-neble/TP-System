@@ -24,7 +24,7 @@
 
 //  Declarations des fonctions concernant les fichiers
 //  =========================================================
-sigemptyset (& Action.sa_mask);
+
 namespace nsSysteme
 {
    void        Stat    (const char * file_name, struct stat * buf)
