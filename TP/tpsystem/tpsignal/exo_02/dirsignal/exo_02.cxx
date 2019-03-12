@@ -34,10 +34,25 @@ namespace{
 
 int main(int argc, char * argv []) {
   try {
-    struct sigaction Act;
-    Act.sa_flags = SA_RESETHAND;
-    Act.sa_mask
-
+    if(1 != argc)
+      throw CExc ("main()", string ("Usage :") + argv[0]);
+    for (int NumSig = 1; NumSig < CstSigMax; ++NumSig) {
+      if(NumSig != SIGKILL && NumSig != SIGSTOP) {
+        struct sigaction Act;
+        Act.sa_flags = SA_RESETHAND;
+        Act.sa_handler = Derout;
+        sigemptyset(& Act.sa_mask);
+        Sigaction(SIGINT,&Act, 0);
+        cout << "Signal numero " << setw(2) << NumSig
+	           << " signifiant " << _sys_siglist [NumSig]  << " deroute, traitement Particulier,"
+	           << " et restoration automatique au traitement par defaut\n";
+      }
+      else {
+ 	      cout << "Omettant le signal " << _sys_siglist [NumSig] << "\n";
+       }
+     }
+     cout << "Deroutement acheve.\n";
+     for(;;);
     return 0;
   }
   catch (const CExc & Exc) {
